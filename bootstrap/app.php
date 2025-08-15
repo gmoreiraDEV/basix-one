@@ -11,10 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // seus aliases de middleware
         $middleware->alias([
             'resolve.tenant' => \App\Http\Middleware\ResolveTenant::class,
             'inject.theme'   => \App\Http\Middleware\InjectTenantTheme::class,
+            'admin.only'     => EnsureUserIsAdmin::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
